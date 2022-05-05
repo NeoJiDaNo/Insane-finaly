@@ -1,5 +1,6 @@
 const scroll = () => {
     const menuNav = document.querySelector('.popup-menu-nav')
+    const menuModal = document.querySelector('.popup-dialog-menu')
     const anchors = menuNav.querySelectorAll('.popup-menu-nav__item > a')
     const a = document.querySelector('.button-footer > a')
 
@@ -17,6 +18,7 @@ const scroll = () => {
     for (let anchor of anchors) {
         anchor.addEventListener('click', function (e) {
             e.preventDefault()
+            menuModal.style.marginRight = 0
 
             const blockID = anchor.getAttribute('href')
 

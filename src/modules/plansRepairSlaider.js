@@ -3,15 +3,15 @@ const repairSlaider = () => {
     const repairNavs = document.querySelectorAll('.repair-types-nav__item')
     const slideCount = document.querySelector('.slider-counter-content__current')
     const slideTotal = document.querySelector('.slider-counter-content__total')
-    const repairSlides1 = document.querySelectorAll('.types-repair1 > .repair-types-slider__slide')
-    const repairSlides2 = document.querySelectorAll('.types-repair2 > .repair-types-slider__slide')
-    const repairSlides3 = document.querySelectorAll('.types-repair3 > .repair-types-slider__slide')
-    const repairSlides4 = document.querySelectorAll('.types-repair4 > .repair-types-slider__slide')
-    const repairSlides5 = document.querySelectorAll('.types-repair5 > .repair-types-slider__slide')
+    const repairSlides1 = document.querySelector('.types-repair1')
+    const repairSlides2 = document.querySelector('.types-repair2')
+    const repairSlides3 = document.querySelector('.types-repair3')
+    const repairSlides4 = document.querySelector('.types-repair4')
+    const repairSlides5 = document.querySelector('.types-repair5')
     let numSlides = repairSlides1
     let count = 1
     let indexSlaid = 0
-    slideTotal.textContent = numSlides.length
+    slideTotal.textContent = numSlides.querySelectorAll('.repair-types-slider__slide').length
 
     repairNavs.forEach((btn, key) => {
         btn.addEventListener('click', (e) => {
@@ -20,10 +20,8 @@ const repairSlaider = () => {
             elem.classList.remove('active')
             e.target.classList.add('active')
             slideOff()
-            console.log(numSlides);
             if (key == 0) {numSlides = repairSlides1} else if (key == 1) {numSlides = repairSlides2} else if (key == 2) {numSlides = repairSlides3} else if (key == 3) {numSlides = repairSlides4} else if (key == 4) {numSlides = repairSlides5}
-            slideTotal.textContent = numSlides.length
-            console.log(numSlides);
+            slideTotal.textContent = numSlides.querySelectorAll('.repair-types-slider__slide').length
             slideOn()
             slideCount.textContent = 1
             count = 1
@@ -31,42 +29,36 @@ const repairSlaider = () => {
     })
 
     const slideOff = () => {
-        numSlides.forEach((btn, key) => {
-            numSlides[key].style.display = 'none'
-        })
+        numSlides.style.display = 'none'
+        numSlides.style.transform = 'translateY(0px)'
     }
 
     const slideOn = () => {
-        numSlides[0].style.display = 'block'
+        numSlides.style.display = 'block'
     }
 
     document.addEventListener('click', (e) => {
         if (e.target.closest('#repair-types-arrow_right')) {
-            if (count == slideTotal.textContent) {
-                count = 0
-            }
             count++
-            slideCount.textContent = count
-            numSlides[indexSlaid].style.display = 'none'
-            indexSlaid++
-            if (indexSlaid == numSlides.length - 1) {
-                indexSlaid = 0
+            indexSlaid += -547
+            if (count > slideTotal.textContent) {
+                count = 5
+                return
             }
-            numSlides[indexSlaid].style.display = 'block'
+            slideCount.textContent = count
+            numSlides.style.transform = `translateY(${indexSlaid + 'px'})`
+            numSlides.style.display = 'block'
         }
 
         if (e.target.closest('#repair-types-arrow_left')) {
             count--
-            if (count == 0) {
-                count = slideTotal.textContent
+            indexSlaid += 547
+            if (count < 1) {
+                count = 1
+                return
             }
             slideCount.textContent = count
-            numSlides[indexSlaid].style.display = 'none'
-            if (indexSlaid == 0) {
-                indexSlaid = numSlides.length - 1
-            }
-            indexSlaid--
-            numSlides[indexSlaid].style.display = 'block'
+            numSlides.style.transform = `translateY(${indexSlaid + 'px'})`
         }
     })
 }

@@ -43,8 +43,6 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
         })
 
-        console.log('submit')
-
         if(validate(formElements)) {
             sendData(formBody)
                 .then(data => {

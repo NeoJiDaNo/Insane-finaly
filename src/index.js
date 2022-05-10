@@ -11,6 +11,7 @@ import accordion from "./modules/accordion"
 import privacyPolice from "./modules/privacyPolice"
 import portfolioSlider from "./modules/sliderPortfolio"
 import portfolioModal from "./modules/portfolioModal"
+import comment from "./modules/sliderComment"
 
 contacts()
 menu()
@@ -24,6 +25,7 @@ accordion()
 privacyPolice()
 portfolioSlider()
 portfolioModal()
+comment()
 
 sendForm({
     formId: 'feedback1',

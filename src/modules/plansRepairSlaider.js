@@ -11,6 +11,7 @@ const repairSlaider = () => {
     let numSlides = repairSlides1
     let count = 1
     let indexSlaid = 0
+    let adapSlaid = 0
     slideTotal.textContent = numSlides.querySelectorAll('.repair-types-slider__slide').length
 
     repairNavs.forEach((btn, key) => {
@@ -24,6 +25,7 @@ const repairSlaider = () => {
             slideTotal.textContent = numSlides.querySelectorAll('.repair-types-slider__slide').length
             slideOn()
             slideCount.textContent = 1
+            indexSlaid = 0
             count = 1
         })
     })
@@ -36,6 +38,30 @@ const repairSlaider = () => {
     const slideOn = () => {
         numSlides.style.display = 'block'
     }
+
+    const arrowInit = () => {
+        document.querySelector('#nav-arrow-repair-right_base').style.display = 'flex'
+        document.querySelector('#nav-arrow-repair-left_base').style.display = 'flex'
+        if (adapSlaid == -680) {
+            document.querySelector('#nav-arrow-repair-right_base').style.display = 'none'
+        }
+        if (adapSlaid == 0) {
+            document.querySelector('#nav-arrow-repair-left_base').style.display = 'none'
+        }
+    }
+
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#nav-arrow-repair-right_base')) {
+            adapSlaid += -340
+            document.querySelector('.nav-list-repair').style.transform = `translateX(${adapSlaid + 'px'})`
+            arrowInit()
+        }
+        if (e.target.closest('#nav-arrow-repair-left_base')) {
+            adapSlaid += 340
+            document.querySelector('.nav-list-repair').style.transform = `translateX(${adapSlaid + 'px'})`
+            arrowInit()
+        }
+    })
 
     document.addEventListener('click', (e) => {
         if (e.target.closest('#repair-types-arrow_right')) {
@@ -61,6 +87,7 @@ const repairSlaider = () => {
             numSlides.style.transform = `translateY(${indexSlaid + 'px'})`
         }
     })
+    arrowInit()
 }
 
 export default repairSlaider

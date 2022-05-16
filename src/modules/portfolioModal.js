@@ -8,7 +8,7 @@ const portfolioModal = () => {
     const counter = document.querySelector('#popup-portfolio-counter')
     const countTotal = counter.querySelector('.slider-counter-content__total')
     const countCurrent = counter.querySelector('.slider-counter-content__current')
-    console.log(portText);
+    
     let num = 0
     let count = 1
     let countText = 0
